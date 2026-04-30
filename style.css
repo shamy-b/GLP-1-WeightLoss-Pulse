@@ -1,0 +1,68 @@
+/* Modern and Premium CSS for GLP-1 WeightLoss Pulse */
+
+:root {
+    --primary-color: #6C5CE7;
+    --secondary-color: #A29BFE;
+    --background-color: #0F0F13;
+    --card-bg: #1A1A23;
+    --text-color: #E0E0E0;
+    --accent-color: #00D2D3;
+}
+
+[data-testid="stAppViewContainer"] {
+    background: radial-gradient(circle at top right, #1e1b4b, #0f172a);
+    color: var(--text-color);
+}
+
+[data-testid="stSidebar"] {
+    background-color: rgba(26, 26, 35, 0.8) !important;
+    backdrop-filter: blur(10px);
+    border-right: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.stMetric {
+    background: rgba(255, 255, 255, 0.05);
+    padding: 20px;
+    border-radius: 15px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    transition: transform 0.3s ease;
+}
+
+.stMetric:hover {
+    transform: translateY(-5px);
+    border-color: var(--primary-color);
+}
+
+h1, h2, h3 {
+    font-family: 'Outfit', sans-serif;
+    background: linear-gradient(90deg, #FFFFFF, #A29BFE);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.stButton>button {
+    background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+    color: white;
+    border: none;
+    padding: 10px 24px;
+    border-radius: 8px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.stButton>button:hover {
+    box-shadow: 0 4px 15px rgba(108, 92, 231, 0.4);
+    transform: scale(1.02);
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+    width: 8px;
+}
+::-webkit-scrollbar-track {
+    background: var(--background-color);
+}
+::-webkit-scrollbar-thumb {
+    background: var(--primary-color);
+    border-radius: 10px;
+}

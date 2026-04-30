@@ -1,0 +1,10 @@
+pandas
+numpy
+streamlit
+streamlit-extras
+streamlit-lottie
+plotly
+matplotlib
+seaborn
+streamlit-option-menu
+streamlit-lottie
