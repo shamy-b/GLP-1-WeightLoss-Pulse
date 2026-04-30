@@ -8,3 +8,7 @@ matplotlib
 seaborn
 streamlit-option-menu
 streamlit-lottie
+scikit-learn
+lightgbm
+imbalanced-learn
+joblib
