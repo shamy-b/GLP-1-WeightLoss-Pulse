@@ -1,81 +1,102 @@
-# GLP-1 WeightLoss Pulse: Analytics & AI Risk Predictor
+# GLP-1 WeightLoss Pulse: Advanced Analytics & AI Risk Forecasting
 
 ## 🚀 Project Overview
-**GLP-1 WeightLoss Pulse** is a comprehensive data science and machine learning project designed to analyze the impact, safety, and market trends of GLP-1 weight loss medications (such as Ozempic, Wegovy, Mounjaro, and Zepbound). 
+**GLP-1 WeightLoss Pulse** is an end-to-end data science and machine learning ecosystem designed to analyze the clinical safety, financial impact, and public interest surrounding GLP-1 medications (Ozempic, Wegovy, Mounjaro, and Zepbound). 
 
-The project combines **advanced data analytics** (Streamlit Dashboard) with **predictive AI** (Risk Assessment Model) to provide a 360-degree view of the GLP-1 landscape—from clinical adverse events to stock market performance.
+This project bridges the gap between **unstructured healthcare data** and **actionable AI insights**, providing a dual-layered approach:
+1.  **Macro-Analytics**: A multi-page Streamlit dashboard tracking global market trends and FDA safety reports.
+2.  **Micro-Forecasting**: A specialized AI engine that predicts individual patient risk probabilities for serious adverse reactions.
 
 ---
 
-## 🛠️ Features
+## 🛠️ Feature Deep-Dive
 
-### 1. Interactive Analytics Dashboard (`app.py`)
-*   **Executive Summary:** High-level KPIs including total adverse reports and active clinical trials.
-*   **Clinical Safety Profile:** Deep dive into patient demographics and reaction outcomes.
-*   **Market Pulse:** Multi-axis visualization comparing Google Search interest with stock prices (Eli Lilly & Novo Nordisk).
-*   **Research Pipeline:** Tracking the progression of GLP-1 drugs through clinical trial phases.
+### 1. The Analytics Dashboard (`app.py`)
+A comprehensive visual suite designed for healthcare analysts and market researchers:
+*   **🏠 Executive Summary**: Real-time KPIs tracking total adverse reports, active clinical trials, and stock performance of Novo Nordisk (NVO) and Eli Lilly (LLY).
+*   **🏥 Clinical Safety Profile**: 
+    *   Interactive demographic analysis (Age & Sex distribution).
+    *   Dynamic "Outcome Donut Charts" (Hospitalization vs. Life-Threatening vs. Non-Serious).
+    *   Top 10 Adverse Reaction tracking per medication.
+*   **📈 Market Pulse**: Dual-axis time-series visualization overlaying Google Search Interest (public hype) against historical stock price volatility.
+*   **🔬 Research Pipeline**: A funnel visualization of clinical trials moving from Phase 1 to Phase 4.
 
 ### 2. AI Patient Risk Predictor (`modelapp.py`)
-*   **Machine Learning Model:** A highly optimized **HistGradientBoosting** classifier.
-*   **Functionality:** Predicts the probability of a "Serious" adverse event based on a patient's Age, Weight, Sex, and specific Drug type.
-*   **Performance Metrics:**
-    *   **ROC AUC Score:** ~0.85 (High predictive power)
-    *   **Recall (Serious Events):** 77% (Optimized for patient safety)
-    *   **Stability:** Validated using 5-Fold Stratified Cross-Validation.
+An interactive AI tool for predictive safety assessment:
+*   **Core Engine**: Uses an optimized **HistGradientBoostingClassifier** (Scikit-Learn's state-of-the-art gradient boosting implementation).
+*   **Predictive Logic**: Analyzes patient age, weight, biological sex, and specific GLP-1 drug type to output a real-time risk probability score.
+*   **Safety Thresholds**: Implements colored visual alerts (Green/Orange/Red) to provide immediate feedback on predicted risk levels.
 
 ---
 
-## 📊 Dataset Details
-The project utilizes 8 interconnected datasets stored in the `Dataset/` directory:
-1.  **`adverse_events.csv`**: Raw FDA adverse event reports.
-2.  **`clinical_trials.csv`**: Data on active and completed GLP-1 trials.
-3.  **`stock_prices.csv`**: Historical prices for LLY and NVO.
-4.  **`search_trends.csv`**: Google Trends data for weight loss drug hype.
-5.  **`drugs_overview.csv`**: Mechanism of action and manufacturer info.
-6.  *Plus summary and reference datasets.*
+## 🧠 Machine Learning Methodology
+The "Top Model" was developed through a rigorous scientific pipeline:
+
+*   **Data Preprocessing**: 
+    *   **Unit Standardization**: Automated conversion of patient ages from Months/Days/Weeks into uniform Year decimals.
+    *   **Grouped Imputation**: Missing weight and age data were filled using medians grouped by specific medication types to maintain demographic accuracy.
+*   **Feature Engineering**:
+    *   Extracted the top 20 most frequent adverse reactions from ~100k reports.
+    *   Engineered binary flag features to transform unstructured reaction text into structured input for the model.
+*   **Imbalance Handling**: Utilized **SMOTE (Synthetic Minority Over-sampling Technique)** to address the heavy class imbalance (serious vs. non-serious events) in medical reporting.
+*   **Optimization**: Applied **GridSearchCV** with 3-fold cross-validation to tune hyperparameters:
+    *   `learning_rate`: 0.2
+    *   `max_depth`: 20
+    *   `max_iter`: 200
+*   **Model Validation**: Achieving a stable **ROC-AUC of 0.85** and a **Recall of 77%** for high-risk cases.
 
 ---
 
-## ⚙️ Installation & Usage
+## 📊 Dataset Architecture
+The project utilizes 8 interconnected datasets (`Dataset/` folder):
+*   `adverse_events.csv`: Primary source of patient-level clinical reports (FDA FAERS data).
+*   `clinical_trials.csv`: Detailed records of global clinical study progressions.
+*   `stock_prices.csv`: Daily historical pricing for key pharmaceutical players (LLY, NVO).
+*   `search_trends.csv`: Aggregated search volume data for GLP-1 related keywords.
+*   `wikipedia_summaries.csv`: Contextual information on drug mechanisms and history.
 
-### 1. Prerequisites
-Ensure you have Python 3.10+ installed.
+---
 
-### 2. Setup Environment
+## ⚙️ Technical Stack
+*   **Frontend**: Streamlit (Dashboarding), Plotly (Interactive Visuals).
+*   **Data Handling**: Pandas, NumPy.
+*   **Machine Learning**: Scikit-Learn, XGBoost, Imbalanced-Learn (SMOTE).
+*   **Serialization**: Joblib.
+
+---
+
+## 🚀 Installation & Getting Started
+
+### 1. Environment Setup
 ```bash
 # Clone the repository
 git clone https://github.com/shamy-b/GLP-1-WeightLoss-Pulse.git
 cd GLP-1-WeightLoss-Pulse
 
-# Install dependencies
+# Install all required libraries
 pip install -r requirements.txt
 ```
 
-### 3. Training the Model
-If you wish to re-train the AI model or view the training metrics:
-1.  Open `model_training.ipynb` in Jupyter.
-2.  Run all cells. This will generate the required `.joblib` files.
+### 2. Training & Replication
+To replicate the AI model or inspect the tuning results, open `model_training.ipynb` and run all cells. This generates the following artifacts:
+*   `glp1_risk_model.joblib`: The trained model binary.
+*   `scaler.joblib`: Numerical feature scaler.
+*   `le_sex.joblib`: Label encoder for demographics.
+*   `feature_names.joblib`: Column definitions for model inference.
 
-### 4. Running the Applications
-*   **To view the Analytics Dashboard:**
-    ```bash
-    streamlit run app.py
-    ```
-*   **To use the AI Risk Predictor:**
-    ```bash
-    streamlit run modelapp.py
-    ```
-
----
-
-## 🧠 Machine Learning Pipeline
-Our "Top Model" was developed through a rigorous 4-phase pipeline:
-1.  **Preprocessing:** Handling missing values via grouped medians and standardizing patient age units.
-2.  **Feature Engineering:** Converting unstructured "Reaction" text into binary features for top symptoms.
-3.  **Optimization:** Using **GridSearchCV** to tune hyperparameters (learning rate, depth, etc.).
-4.  **Serialization:** Saving the final model and scalers for real-time inference in the Streamlit app.
+### 3. Execution
+**Analytics Dashboard:**
+```bash
+streamlit run app.py
+```
+**AI Risk Predictor:**
+```bash
+streamlit run modelapp.py
+```
 
 ---
 
-## 📜 Credits & License
-Developed for portfolio purposes as a demonstration of **End-to-End Data Science**—from raw data cleaning to AI deployment.
+## 🛠️ Roadmap & Future Enhancements
+- [ ] **NLP Integration**: Implement TF-IDF or BERT embeddings for more nuanced analysis of adverse reaction text descriptions.
+- [ ] **Time-Series Forecasting**: Add an LSTM-based predictor for future stock price movements based on clinical trial success rates.
+- [ ] **Multi-Drug Comparison**: Expand the AI predictor to compare risk profiles across multiple GLP-1 drugs simultaneously.
