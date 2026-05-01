@@ -9,6 +9,6 @@ seaborn
 streamlit-option-menu
 streamlit-lottie
 scikit-learn
-lightgbm
+xgboost
 imbalanced-learn
 joblib
